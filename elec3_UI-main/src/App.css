@@ -1,0 +1,465 @@
+* { box-sizing: border-box; }
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.app-root {
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 12px;
+	color: #222;
+}
+
+.app-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.app-header h1 {
+	font-size: 1.2rem;
+	margin: 0;
+}
+
+.view-controls button {
+	margin-left: 6px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+.view-controls button.active {
+	background: #0366d6;
+	color: #fff;
+	border-color: rgba(3,102,214,0.9);
+}
+
+.app-main {
+	margin-top: 12px;
+}
+
+/* RFID list */
+.rfid-section .add-form {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 10px;
+}
+.add-form input {
+	flex: 1;
+	padding: 8px;
+	border-radius: 6px;
+	border: 1px solid #ddd;
+}
+.add-form button {
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: none;
+	background: #0366d6;
+	color: #fff;
+}
+
+/* cards */
+.rfid-list {
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 8px;
+}
+.rfid-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-radius: 8px;
+	border: 1px solid #eee;
+	background: #fafafa;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.rfid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.rfid-main {
+	display: flex;
+	flex-direction: column;
+}
+.rfid-tag {
+	font-weight: 600;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+}
+.rfid-last {
+	font-size: 0.8rem;
+	color: #666;
+}
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  transition: all 0.3s ease;
+}
+.status-active {
+  background: #4CAF50;
+  box-shadow: 0 0 10px #4CAF50;
+  animation: pulse 2s infinite;
+}
+.status-inactive {
+  background: #f44336;
+  box-shadow: 0 0 10px #f44336;
+}
+.status-not-found {
+  background: #9e9e9e;
+  animation: blink 1s infinite;
+}
+
+/* actions */
+.rfid-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* toggle switch */
+.toggle {
+	position: relative;
+	display: inline-block;
+	width: 46px;
+	height: 26px;
+}
+.toggle input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.2s;
+	border-radius: 16px;
+}
+.slider:before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	transition: 0.2s;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle input:checked + .slider {
+	background: #0366d6;
+}
+.toggle input:checked + .slider:before {
+	transform: translateX(20px);
+}
+
+/* Prevent pointer events on the checkbox but keep appearance */
+.toggle-input--no-pointer {
+  pointer-events: none;
+}
+
+/* Make sure cursor/hover of the slider doesn't imply clickability */
+.toggle[aria-disabled="true"] .slider {
+  cursor: default;
+}
+
+/* logs */
+.logs-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+.clear-btn {
+	background: #e55353;
+	color: white;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 6px;
+}
+.logs-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.log-item {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+	border-bottom: 1px dashed #eee;
+}
+.log-tag {
+	font-weight: 600;
+}
+.log-time {
+	font-size: 0.8rem;
+	color: #666;
+}
+
+/* empties */
+.empty {
+	padding: 20px;
+	text-align: center;
+	color: #666;
+}
+
+/* footer */
+.app-footer {
+	margin-top: 16px;
+	text-align: center;
+	color: #666;
+	font-size: 0.85rem;
+}
+
+/* dashboard shell */
+.dashboard-shell {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+}
+
+/* outer frame with thick border like the example */
+.dashboard-frame {
+	border: 6px solid #000;
+	display: flex;
+	flex-direction: row;
+	background: #000; /* makes the outer left gap black in small widths */
+	min-height: 420px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* sidebar (left) */
+.rfid-sidebar {
+	width: 200px;
+	background: #000;
+	color: #fff;
+	padding: 12px;
+	flex: 0 0 200px;
+}
+.sidebar-inner {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+.sidebar-add {
+	display: flex;
+	gap: 8px;
+}
+.sidebar-add input {
+	flex: 1;
+	padding: 6px 8px;
+	border-radius: 4px;
+	border: none;
+	font-size: 0.9rem;
+}
+.sidebar-add button {
+	width: 36px;
+	border-radius: 4px;
+	background: #0366d6;
+	color: #fff;
+	border: none;
+	font-weight: 700;
+}
+
+/* compact list */
+.sidebar-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.sidebar-item {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 8px;
+	padding: 6px;
+	background: #0b0b0b;
+	border-radius: 4px;
+}
+.item-index {
+	width: 26px;
+	color: #bbb;
+	text-align: right;
+}
+.item-tag {
+	flex: 1;
+	font-weight: 600;
+}
+.item-toggle {
+	width: 28px;
+	height: 18px;
+	border-radius: 4px;
+	border: 1px solid #444;
+	background: #eee;
+	cursor: pointer;
+	box-shadow: inset 0 0 0 2px rgba(255,255,255,0.02);
+}
+.item-toggle.on { background: #4cd964; }
+.item-toggle.off { background: #e6e6e6; }
+
+/* make sidebar toggles visually identical but not interactive */
+.item-toggle--static {
+  pointer-events: none; /* prevents mouse clicks */
+  cursor: default;      /* remove pointer cursor */
+  outline: none;
+}
+.item-toggle[aria-disabled="true"] {
+  pointer-events: none;
+  cursor: default;
+}
+
+/* logs panel (right) */
+.logs-panel {
+	flex: 1;
+	background: #fff;
+	padding: 14px;
+	border-left: 2px solid #000;
+	overflow: auto;
+}
+.logs-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+.logs-header h2 {
+	margin: 0;
+	font-size: 1.05rem;
+}
+.clear-btn {
+	background: #e55353;
+	color: white;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 6px;
+}
+
+/* table-like layout */
+.logs-table {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+.logs-table th,
+.logs-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.logs-table tbody tr {
+  transition: all 0.3s ease;
+}
+.logs-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.logs-row {
+	display: grid;
+	grid-template-columns: 48px 1fr 110px 220px;
+	align-items: center;
+	padding: 8px 6px;
+	border-bottom: 1px solid #f0f0f0;
+}
+.logs-row-header {
+	font-weight: 700;
+	background: #fff;
+	border-bottom: 2px solid #ccc;
+}
+.col.idx { padding-left: 6px; color:#222; }
+.col.tag { color:#222; font-weight:600; }
+.col.status { color:#222; text-align:left; }
+.col.time { color:#555; font-size:0.9rem; }
+
+/* empty state */
+.logs-empty {
+	padding: 18px;
+	color: #666;
+	text-align: center;
+}
+
+/* responsive */
+@media (min-width: 640px) {
+	.rfid-list {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+@media (min-width: 980px) {
+	.rfid-list {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* responsive: stack on small screens */
+@media (max-width: 700px) {
+	.dashboard-frame { flex-direction: column; }
+	.rfid-sidebar { width: 100%; flex: 0 0 auto; border-bottom: 4px solid #000; }
+	.logs-row { grid-template-columns: 40px 1fr 70px; grid-auto-rows: auto; }
+	.col.time { display: none; } /* hide time for compact view */
+}
