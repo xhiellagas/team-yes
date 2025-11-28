@@ -9,17 +9,18 @@ USE it414_db_team_yes;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS rfid_reg (
     rfid_data VARCHAR(50) PRIMARY KEY,
-    rfid_status TINYINT(1) NOT NULL DEFAULT 0
+    rfid_status BOOLEAN NOT NULL
 );
+
 
 -- -----------------------------------------------------
 -- 3. RFID Logs Table (rfid_logs)
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS rfid_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    time_log DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    time_log DATETIME NOT NULL,
     rfid_data VARCHAR(50) NOT NULL,
-    rfid_status TINYINT(1) NOT NULL,
-    FOREIGN KEY (rfid_data) REFERENCES rfid_reg(rfid_data)
+    rfid_status BOOLEAN NOT NULL
 );
+
 
