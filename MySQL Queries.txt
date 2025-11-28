@@ -23,4 +23,10 @@ CREATE TABLE IF NOT EXISTS rfid_logs (
     rfid_status BOOLEAN NOT NULL
 );
 
-
+-- -----------------------------------------------------
+-- 4. Register Cards (rfid_reg)
+-- -----------------------------------------------------
+INSERT INTO rfid_reg (rfid_data, rfid_status)
+VALUES
+('a6ade300', 0),
+('1e910004', 0);
