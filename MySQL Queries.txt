@@ -9,8 +9,7 @@ USE it414_db_team_yes;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS rfid_reg (
     rfid_data VARCHAR(50) PRIMARY KEY,
-    rfid_status TINYINT(1) NOT NULL DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    rfid_status TINYINT(1) NOT NULL DEFAULT 0
 );
 
 -- -----------------------------------------------------
@@ -23,3 +22,4 @@ CREATE TABLE IF NOT EXISTS rfid_logs (
     rfid_status TINYINT(1) NOT NULL,
     FOREIGN KEY (rfid_data) REFERENCES rfid_reg(rfid_data)
 );
+
